@@ -60,12 +60,12 @@ module.exports = function(app) {
 
   // Load registration page
   app.get("/register", function(req, res) {
-    res.render("registration");
+    res.render("registration", {title: "Register"});
   })
 
   // Load login page
   app.get("/login", function(req, res) {
-    res.render("login");
+    res.render("login", {title: "Login"});
   })
 
   // Render 404 page for any unmatched routes
