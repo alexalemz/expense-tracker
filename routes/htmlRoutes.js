@@ -3,6 +3,15 @@ var db = require("../models");
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
+    // If the user already has an account send them to the members page
+    if (req.user) {
+      res.redirect("/addexpense");
+    }
+    res.redirect("/login");
+  })
+
+  // Load Add Expense page
+  app.get("/addexpense", function(req, res) {
     db.Category.findAll({}).then(function(dbCategories) {
       // var expensesParams = req.body.UserId ? {
       //   where: {
@@ -12,7 +21,7 @@ module.exports = function(app) {
       // console.log("UserId", req.body.UserId);
       // console.log("expensesParams", expensesParams);
       // db.Expense.findAll(expensesParams).then(function(dbExpenses) {
-        res.render("index", {
+        res.render("addexpense", {
           msg: "Welcome!",
           title: "Add Expense",
           categories: dbCategories,
