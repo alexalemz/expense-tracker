@@ -1,0 +1,58 @@
+<div class="container">
+
+<h2>View Expenses</h2>
+<br>
+<form id="view-expenses">
+    <h5>Filter by</h5>
+    {{!-- Be able to filter by Date range, Category, Description --}}
+    <div style="display:inline-block" class="form-group">
+        <label for="category-search">Category (optional)</label> <br>
+        <select id="category-search" class="form-control">
+            <option value="">All</option>
+            {{#each categories}}
+                <option value={{this.id}}>{{category_name}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div style="display:inline-block" class="form-group">
+        <label for="description-search">Description (optional)</label> <br>
+        <input id="description-search" type="text" class="form-control">
+    </div>
+    <br>
+    <div>
+        <div style="display:inline-block" class="form-group">
+            <label for="date-search">Date range</label>
+            <select id="date-search" class="form-control">
+                <option value="last30days">Last 30 Days</option>
+                <option value="customrange">Custom range</option>
+            </select>
+        </div>
+        <div id="date-range" style="display:inline-block; display:none" class="form-group">
+            <div class="form-group" style="display:inline-block">
+                <label for="date-range-min">Start</label> <br>
+                <input type="date" id="date-range-min" class="form-control" required>
+            </div>
+            <div class="form-group" style="display:inline-block">
+                <label for="date-range-max">End</label> <br>
+                <input type="date" id="date-range-max" class="form-control" required>
+            </div>
+        </div>
+    </div>
+    <br>
+    <input type="submit" class="btn" value="Search">
+</form>
+<div id="expenses-display">
+    {{#if expenses}}
+        {{#each expenses}}
+            {{id}} {{description}} {{amount}} {{date}} {{CategoryId}} <br>
+        {{/each}}
+    {{/if}}
+</div>
+
+
+</div> {{!-- .container --}}
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script src="/js/viewexpenses.js"></script>
