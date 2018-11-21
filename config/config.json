@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "password",
-    "database": "expensesTracker",
+    "database": "expensesTracker2",
     "host": "localhost",
     "dialect": "mysql"
   },
