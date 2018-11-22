@@ -5,9 +5,12 @@ module.exports = function(app) {
   app.get("/", function(req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {
+      console.log(req.user.email);
+      // res.redirect("/api/user_data")
       res.redirect("/addexpense");
     }
-    res.redirect("/login");
+    else
+      res.redirect("/login");
   })
 
   // Load Add Expense page
