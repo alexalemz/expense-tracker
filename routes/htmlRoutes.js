@@ -1,6 +1,16 @@
 var db = require("../models");
 
 module.exports = function(app) {
+
+  // Middleware to setup local variables that will accessible 
+  // in every pages context (for all routes in this file).
+  app.use(function (req, res, next) {
+    res.locals = {
+      user: req.user ? req.user.email : undefined
+    };
+    next();
+  });
+
   // Load index page
   app.get("/", function(req, res) {
     // If the user already has an account send them to the members page
@@ -50,13 +60,15 @@ module.exports = function(app) {
   })
 
   app.get("/expense/:id", function(req, res) {
-    db.Expense.findOne({ where: { id: req.params.id } }).then(function(dbExpense) {
+    db.Expense.findOne({ where: { id: req.params.id, UserId: req.user.id } }).then(function(dbExpense) {
       db.Category.findAll({}).then(function(dbCategories) {
         res.render("expense", {
           title: "Edit Expense",
           expense: dbExpense,
           categories: dbCategories
         });
+      }).catch(function(err) {
+        res.json(err);
       });
     });
   });

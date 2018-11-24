@@ -60,7 +60,8 @@ module.exports = function(app) {
   // Get all expenses from a certain user
   app.get("/api/expenses", function(req, res) {
     console.log("In apiRoutes. req.query", req.query);
-    var UserId = req.query.UserId;
+    // var UserId = req.query.UserId;
+    var UserId = req.user.id;
     var DateRange = req.query.DateRange;
     var description = req.query.description;
     var CategoryId = req.query.CategoryId;
@@ -87,6 +88,7 @@ module.exports = function(app) {
 
   // Create a new expense
   app.post("/api/expenses", function(req, res) {
+    req.body.UserId = req.user.id;
     db.Expense.create(req.body).then(function(dbExpense) {
       res.json(dbExpense);
     });
@@ -97,10 +99,14 @@ module.exports = function(app) {
     const updatedExpense = req.body;
     db.Expense.update(updatedExpense, {
         where: {
-          id: req.params.id
+          id: req.params.id,
+          UserId: req.user.id
         }
       }).then(function(dbExpense) {
         res.json(dbExpense);
+      }).catch(function(err) {
+        console.log(err);
+        res.json(err);
       });
   });
 
@@ -108,11 +114,15 @@ module.exports = function(app) {
   app.delete("/api/expenses/:id", function(req, res) {
     db.Expense.destroy({
       where: {
-        id: req.params.id
+        id: req.params.id,
+        UserId: req.user.id
       }
     }).then(function(dbExpense) {
       res.json(dbExpense);
-    })
+    }).catch(function(err) {
+      console.log(err);
+      res.json(err);
+    });
   })
 
   // Delete an example by id
