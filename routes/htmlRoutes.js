@@ -1,4 +1,5 @@
 var db = require("../models");
+const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function(app) {
 
@@ -23,8 +24,13 @@ module.exports = function(app) {
       res.redirect("/login");
   })
 
+  // Sample Home page, with info about the app.
+  app.get("/home", function(req, res) {
+    res.render("home", {title: "Home"});
+  })
+
   // Load Add Expense page
-  app.get("/addexpense", function(req, res) {
+  app.get("/addexpense", isAuthenticated, function(req, res) {
     db.Category.findAll({}).then(function(dbCategories) {
       // var expensesParams = req.body.UserId ? {
       //   where: {
@@ -44,7 +50,8 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/viewexpenses", function(req, res) {
+  // View Expenses page
+  app.get("/viewexpenses", isAuthenticated, function(req, res) {
     db.Category.findAll({}).then(function(dbCategories) {
       res.render("viewexpenses", {
         title: "View Expenses",
@@ -53,13 +60,15 @@ module.exports = function(app) {
     });
   })
 
-  app.get("/dashboard", function(req, res) {
+  // Dashboard
+  app.get("/dashboard", isAuthenticated, function(req, res) {
     res.render("dashboard", {
       title: "Dashboard",
     });
   })
 
-  app.get("/expense/:id", function(req, res) {
+  // Edit Expense page
+  app.get("/expense/:id", isAuthenticated, function(req, res) {
     db.Expense.findOne({ where: { id: req.params.id, UserId: req.user.id } }).then(function(dbExpense) {
       db.Category.findAll({}).then(function(dbCategories) {
         res.render("expense", {
@@ -73,15 +82,6 @@ module.exports = function(app) {
     });
   });
 
-  // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.render("example", {
-        example: dbExample
-      });
-    });
-  });
-
   // Load registration page
   app.get("/register", function(req, res) {
     res.render("registration", {title: "Register"});
@@ -89,7 +89,8 @@ module.exports = function(app) {
 
   // Load login page
   app.get("/login", function(req, res) {
-    res.render("login", {title: "Login"});
+    console.log("Flash error:", req.flash("error"));
+    res.render("login", {title: "Login", message: req.flash("error")});
   })
 
   // Render 404 page for any unmatched routes

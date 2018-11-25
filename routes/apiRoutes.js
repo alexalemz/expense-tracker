@@ -15,6 +15,7 @@ module.exports = function(app) {
     // They won't get this or even be able to access this page if they aren't authed
     // res.json("/members");
     // res.json("Login successful");
+
     res.json("/");
   });
 
@@ -37,8 +38,12 @@ module.exports = function(app) {
 
   // Route for logging user out
   app.get("/logout", function(req, res) {
-    req.logout();
-    res.redirect("/");
+    req.logOut();
+    // Destroy the session, clear the cookies, and redirect to root.
+    req.session.destroy(function(err) {
+      res.clearCookie('connect.sid', {path: '/'});
+      res.redirect('/');
+    });
   });
 
   // Route for getting some data about our user to be used client side

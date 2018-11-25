@@ -26,9 +26,11 @@ app.use(session({
   store: new SequelizeStore({
     db: db.sequelize
   }),
-  resave: false, 
-  saveUninitialized: false 
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false }
 }));
+app.use(require("express-flash")());
 app.use(passport.initialize());
 app.use(passport.session());
 
