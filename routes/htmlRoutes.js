@@ -70,15 +70,23 @@ module.exports = function(app) {
   // Edit Expense page
   app.get("/expense/:id", isAuthenticated, function(req, res) {
     db.Expense.findOne({ where: { id: req.params.id, UserId: req.user.id } }).then(function(dbExpense) {
-      db.Category.findAll({}).then(function(dbCategories) {
-        res.render("expense", {
-          title: "Edit Expense",
-          expense: dbExpense,
-          categories: dbCategories
+      console.log("req.params.id", req.params.id);
+      console.log("dbExpense", typeof dbExpense);
+      // If no expense was found (either it doesn't exist or it's not the user's expense)
+      if (!dbExpense) {
+        res.render("404");
+      }
+      else {
+        db.Category.findAll({}).then(function(dbCategories) {
+          res.render("expense", {
+            title: "Edit Expense",
+            expense: dbExpense,
+            categories: dbCategories
+          });
+        }).catch(function(err) {
+          res.json(err);
         });
-      }).catch(function(err) {
-        res.json(err);
-      });
+      }
     });
   });
 

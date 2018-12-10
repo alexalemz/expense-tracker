@@ -26,6 +26,12 @@ $(document).ready(function() {
                 moment().format("YYYY-MM-DD")
             ];
         }
+        if (dateSearch === "last90days") {
+            searchData.DateRange = [
+                moment().subtract(90, "days").format("YYYY-MM-DD"), 
+                moment().format("YYYY-MM-DD")
+            ];
+        }
         else if (dateSearch === "customrange") {
             searchData.DateRange = [
                 moment(dateRangeMin, "YYYY-MM-DD").format("YYYY-MM-DD"), 
@@ -51,7 +57,7 @@ $(document).ready(function() {
             display.empty();
 
             var table = `
-            <table class="table table-striped">
+            <table class="table table-striped table-sm table-responsive-sm table-bordered">
               <thead>
                 <tr>
                   <th>Date</th>
@@ -102,6 +108,9 @@ $(document).ready(function() {
 
         var dateRangeDiv = $("#date-range");
         if (selectVal === "last30days") {
+            dateRangeDiv.css("display", "none");
+        }
+        else if (selectVal === "last90days") {
             dateRangeDiv.css("display", "none");
         }
         else if (selectVal === "customrange") {

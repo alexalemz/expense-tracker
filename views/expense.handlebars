@@ -3,30 +3,32 @@
 <h2>Expense details</h2>
 
 <form id="edit-expense">
-    <input style="display:none" value={{expense.id}} id="iddata">
-    <div style="display:inline-block" class="form-group">
-        <label for="description">Description</label> <br>
-        <input type="text" id="description" placeholder="Purchase" class="form-control" value="{{expense.description}}" required>
-    </div>
-    <div style="display:inline-block" class="form-group">
-        <label for="amount">Amount</label> <br>
-        {{!-- <input style="width:6em" placeholder="0.00" type="number" id="amount" class="form-control" step=".01" min=".01" required> --}}
-        <input style="width:8em" placeholder="0.00" type="text" id="amount" class="form-control" value={{expense.amount}} required>
-    </div>
-    <div style="display:inline-block" class="form-group">
-        <label for="date">Date</label> <br>
-        <input type="date" id="date" class="form-control" required>
-        <input style="display:none" data-date="{{expense.date}}" id="datedata">
-    </div>
-    <div style="display:inline-block" class="form-group">
-        <label for="category">Category</label> <br>
-        <select id="category" class="form-control" required>
-            <option value="">-- Select a category --</option>
-            {{#each categories}}
-                <option value={{this.id}}>{{category_name}}</option>
-            {{/each}}
-        </select>
-        <input style="display:none" data-category="{{expense.CategoryId}}" id="categorydata">
+    <div class="form-row">
+        <input style="display:none" value={{expense.id}} id="iddata">
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" id="description" placeholder="Purchase" class="form-control" value="{{expense.description}}" required>
+        </div>
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            {{!-- <input style="width:6em" placeholder="0.00" type="number" id="amount" class="form-control" step=".01" min=".01" required> --}}
+            <input style="width:8em" placeholder="0.00" type="text" id="amount" class="form-control" value={{expense.amount}} required>
+        </div>
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date" class="form-control" required>
+            <input style="display:none" data-date="{{expense.date}}" id="datedata">
+        </div>
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" class="form-control" required>
+                <option value="">-- Select a category --</option>
+                {{#each categories}}
+                    <option value={{this.id}}>{{category_name}}</option>
+                {{/each}}
+            </select>
+            <input style="display:none" data-category="{{expense.CategoryId}}" id="categorydata">
+        </div>
     </div>
     <input type="submit" class="btn btn-primary" value="Update">
     <button id="delete" class="btn btn-danger">Delete</button>
@@ -38,8 +40,6 @@
 
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js"></script>
 <script src="/js/expense.js"></script>
 
