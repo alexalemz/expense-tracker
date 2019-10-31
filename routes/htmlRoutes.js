@@ -15,10 +15,11 @@ module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
     // If the user already has an account send them to the members page
-    if (req.user) {
-      console.log(req.user.email);
+    if (true || req.user) {
+      // console.log(req.user.email);
       // res.redirect("/api/user_data")
-      res.redirect("/addexpense");
+      // res.redirect("/addexpense");
+      res.redirect("/home");
     }
     else
       res.redirect("/login");

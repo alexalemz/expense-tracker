@@ -32,6 +32,18 @@ $(document).ready(function() {
                 moment().format("YYYY-MM-DD")
             ];
         }
+        if (dateSearch === "last6months") {
+            searchData.DateRange = [
+                moment().subtract(6, "months").format("YYYY-MM-DD"), 
+                moment().format("YYYY-MM-DD")
+            ];
+        }
+        if (dateSearch === "last12months") {
+            searchData.DateRange = [
+                moment().subtract(12, "months").format("YYYY-MM-DD"), 
+                moment().format("YYYY-MM-DD")
+            ];
+        }
         else if (dateSearch === "customrange") {
             searchData.DateRange = [
                 moment(dateRangeMin, "YYYY-MM-DD").format("YYYY-MM-DD"), 
@@ -57,7 +69,7 @@ $(document).ready(function() {
             display.empty();
 
             var table = `
-            <table class="table table-striped table-sm table-responsive-sm table-bordered">
+            <table class="table table-striped table-sm table-responsive-sm table-bordered table-hover">
               <thead>
                 <tr>
                   <th>Date</th>
@@ -73,7 +85,7 @@ $(document).ready(function() {
             function row(e) {
                 //return `<p>  ${e.description} ${e.amount} ${moment(e.date).format("MM/DD/YYYY")} ${e.Category.category_name} </p>`;
                 let row = $("<tr>");
-                for (field of [moment(e.date).format("MM/DD/YYYY"), 
+                for (field of [moment(e.date).format("MM-DD-YYYY"), 
                     // Make the description a link to the page to edit the expense.
                     `<a href="/expense/${e.id}">${e.description}</a>`, 
                     "$" + e.amount.toFixed(2), e.Category.category_name
@@ -107,14 +119,12 @@ $(document).ready(function() {
         var selectVal = select.val();
 
         var dateRangeDiv = $("#date-range");
-        if (selectVal === "last30days") {
-            dateRangeDiv.css("display", "none");
-        }
-        else if (selectVal === "last90days") {
-            dateRangeDiv.css("display", "none");
-        }
-        else if (selectVal === "customrange") {
+
+        if (selectVal === "customrange") {
             dateRangeDiv.css("display", "inline-block");
+        }
+        else {
+            dateRangeDiv.css("display", "none");
         }
     });
 

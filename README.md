@@ -1,4 +1,4 @@
-# Expenses Tracker
+# Expense Tracker
 
 An app that lets users keep track of their expenses.
 

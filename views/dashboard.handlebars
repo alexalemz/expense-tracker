@@ -1,16 +1,27 @@
 <div class="container">
-  <h2>Dashboard</h2>
+  <h2>Monthly Spending by Category</h2>
   <br>
 
-  <h5>Monthly Spending by Category</h5>
+  {{!-- <h5>Monthly Spending by Category</h5> --}}
   <form id="pie-chart">
-    <label for="month">Month</label>
-    <select id="month">
-      {{!-- <option value=9>September</option> --}}
-    </select>
-    <input type="submit">
+    <div class="form-row">
+      <div class="form-group col-3 col-lg-2">
+        <label for="month">Month</label>
+        <select id="month" class="form-control">
+        </select>
+      </div>
+        {{!-- <option value=9>September</option> --}}
+      <div class="form-group col-3 col-lg-2">
+        <label for="year">Year</label>
+        <select id="year" class="form-control">
+        </select>
+      </div>
+    </div>
+    <input type="submit" value="Submit" class="btn">
   </form>
+
   <br>
+  
   <div id="canvas-holder" style="width:30%; height:30%;" class="text-center border">
     <h5><span id="selectedMonth"></span></h5>
     {{!-- Canvas is hidden by default --}}

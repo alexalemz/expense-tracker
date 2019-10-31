@@ -53,12 +53,15 @@ $(document).ready(function() {
   // }, 2000);
 
   
-  function generateChart(monthNum) {
+  function generateChart(monthNum, yearNum) {
+    const monthStart = `${yearNum}-${monthNum}-01`;
+    const nextMonthStart = moment(monthStart, 'YYYY-MM-DD').add('1', 'month').format('YYYY-MM-DD');
+
     $.ajax("/api/expenses", {
       type: "GET",
       data: {
         UserId: 1,
-        DateRange: ["2018-" + monthNum + "-01", "2018-" + (parseInt(monthNum) + 1) + "-10"],
+        DateRange: [monthStart, nextMonthStart],
         description: "",
         CategoryId: ""
       }
@@ -123,17 +126,29 @@ $(document).ready(function() {
   // Have the current month selected in the drop-down menu.
   $(`#month [value=${currentMonthNum}]`).attr("selected", "selected");
 
+  var yearSelect = $("#year");
+  yearSelect.empty();
+  let currentYear = parseInt(moment().format("YYYY"));
+  for (let i=0; i < 10; i++) {
+    let y = currentYear - i;
+    yearSelect.append(`<option value=${y}>${y}</option>`);
+  }
+  // Have the current year selected in the drop-down menu.
+  $(`#year [value=${currentYear}]`).attr("selected", "selected");
 
-  generateChart($("#month").val());
+
+  // generateChart($("#month").val(),$("#year").val());
+  generateChart(currentMonthNum, currentYear);
 
 
   // When the user selects a month and hits submit.
   $("#pie-chart").on("submit", function(event) {
     event.preventDefault();
     const month = $("#month").val();
+    const year = $("#year").val();
     console.log(month);
 
-    generateChart(month);
+    generateChart(month, year);
   });
 
 
