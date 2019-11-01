@@ -85,14 +85,30 @@ $(document).ready(function() {
             function row(e) {
                 //return `<p>  ${e.description} ${e.amount} ${moment(e.date).format("MM/DD/YYYY")} ${e.Category.category_name} </p>`;
                 let row = $("<tr>");
-                for (field of [moment(e.date).format("MM-DD-YYYY"), 
+                let date = moment(e.date).format("MM/DD/YYYY");
+                // let date = moment(e.date).format("MM / DD / YYYY");
+                console.log("Date", date)
+                if (date[0] === "0") {
+                    console.log(date, "starts with a zero");
+                    console.log(typeof date)
+                    date = " " + date.slice(1);
+                }
+                [
+                    date, 
                     // Make the description a link to the page to edit the expense.
                     `<a href="/expense/${e.id}">${e.description}</a>`, 
-                    "$" + e.amount.toFixed(2), e.Category.category_name
-                ]) {
+                    "$" + e.amount.toFixed(2), 
+                    e.Category.category_name
+                ].forEach((field, index) => {
                     let td = $("<td>").html(field);
+                    switch (index) {
+                        case 0: td.addClass("dateCell"); break;
+                        case 1: td.addClass("descriptionCell"); break;
+                        case 2: td.addClass("amountCell text-right pr-4"); break;
+                        case 3: td.addClass("categoryCell"); break;
+                    }
                     row.append(td);
-                }
+                })
                 return row.prop("outerHTML");
             }
 

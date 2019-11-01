@@ -1,3 +1,19 @@
+/* Reduce the width because it's too wide. */
+body {
+  width: 98%;
+}
+
+/* Give the date and amount cells in the table a different look. */
+.dateCell/* , .amountCell */ {
+  white-space: pre;
+  /* font-size: .9rem; */
+  line-height: 1.5;
+  /* font-family: 'B612 Mono', monospace; */
+  /* font-family: 'Cutive Mono', monospace; */
+  /* font-family: 'Courier New', Courier, monospace; */
+  /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
+}
+
 /* Change the look of the links in the table in View Expenses */
 .table a {
   color: black;
@@ -120,7 +136,11 @@
 
 /* Mobile media query */
 @media (max-width: 768px) {
+  /* Reduce the width because it's too wide on mobile. */
+  body {
+    width: 95%;
+  }
   .home-logo {
     font-size: 48px;
-}
+  }
 }
