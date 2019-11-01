@@ -154,3 +154,7 @@ body {
 ul.mobile-navlinks .nav-link {
   color: rgba(255, 255, 255, 0.884) !important;
 }
+.mobile-navlinks .fas {
+  width: 16px; height: 16px;
+  margin-right: 4px;
+}
