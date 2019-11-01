@@ -104,7 +104,7 @@ $(document).ready(function() {
                     switch (index) {
                         case 0: td.addClass("dateCell"); break;
                         case 1: td.addClass("descriptionCell"); break;
-                        case 2: td.addClass("amountCell text-right pr-4"); break;
+                        case 2: td.addClass("amountCell text-right pr-lg-3 pr-md-2"); break;
                         case 3: td.addClass("categoryCell"); break;
                     }
                     row.append(td);
