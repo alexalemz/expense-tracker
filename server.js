@@ -1,7 +1,9 @@
 require("dotenv").config();
 var express = require("express");
+var favicon = require("serve-favicon");
+var path = require("path");
 var bodyParser = require("body-parser");
-var cookieParser = require('cookie-parser');
+var cookieParser = require("cookie-parser");
 var session = require("express-session");
 // Requiring passport as we've configured it
 var passport = require("./config/passport");
@@ -16,6 +18,7 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 
 // Middleware
+app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
