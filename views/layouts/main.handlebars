@@ -14,7 +14,7 @@
   {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script> --}}
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-  <title>{{title}} | ExpenseTracker</title>
+  <title>ExpenseTracker | {{title}}</title>
 </head>
 
 <body>
@@ -53,6 +53,31 @@
   </nav> 
 
   <div class="container-fluid">
+      {{!-- Mobile TopBar --}}
+      {{!-- <div class="row">
+        <nav class="d-lg-none bg-light topbar">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/addexpense">
+                <i class="fas fa-plus"></i>
+                Add Expense
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/viewexpenses">
+                <i class="fas fa-file-invoice-dollar"></i>
+                View Expenses
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/dashboard">
+                <i class="fas fa-chart-pie"></i>
+                Monthly Spending {{!-- <span class="sr-only">(current)</span> --}}
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div> --}}
       <div class="row">
         {{!-- Sidebar --}}
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">

@@ -5,13 +5,13 @@
   {{!-- <h5>Monthly Spending by Category</h5> --}}
   <form id="pie-chart">
     <div class="form-row">
-      <div class="form-group col-3 col-lg-2">
+      <div class="form-group col-6 col-md-3 col-lg-2">
         <label for="month">Month</label>
         <select id="month" class="form-control">
         </select>
       </div>
         {{!-- <option value=9>September</option> --}}
-      <div class="form-group col-3 col-lg-2">
+      <div class="form-group col-6 col-md-3 col-lg-2">
         <label for="year">Year</label>
         <select id="year" class="form-control">
         </select>
@@ -22,8 +22,8 @@
 
   <br>
   
-  <div id="canvas-holder" style="width:30%; height:30%;" class="text-center border">
-    <h5><span id="selectedMonth"></span></h5>
+  <div id="canvas-holder" style="width: 300px; height: 350px;{{!-- width:30%; height:30%; --}}" class="text-center border p-2">
+    <h4><span id="selectedMonth"></span></h4>
     {{!-- Canvas is hidden by default --}}
     <canvas id="myChart" style="visibility:hidden"></canvas>
   </div>
