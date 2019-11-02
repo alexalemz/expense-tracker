@@ -5,6 +5,8 @@ module.exports = function(req, res, next) {
     return next();
   }
 
-  // If the user isn't logged in, redirect them to the login page
+  // If the user isn't logged in, store their intended path in req.session.redirectTo,
+  // then redirect them to the login page
+  req.session.redirectTo = req.path;
   return res.redirect("/login");
 };

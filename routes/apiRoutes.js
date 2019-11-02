@@ -16,7 +16,12 @@ module.exports = function(app) {
     // res.json("/members");
     // res.json("Login successful");
 
-    res.json("/");
+    // After login, redirect the user to the homepage or to their intended path, if they had one.
+    let redirectTo = req.session.redirectTo || '/';
+    delete req.session.redirectTo;
+    res.json(redirectTo);
+
+    // res.json("/");
   });
 
   // Route for registering a new user. The user's password is automatically hashed and stored securely thanks to
