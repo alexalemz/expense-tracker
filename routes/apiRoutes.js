@@ -135,6 +135,24 @@ module.exports = function(app) {
     });
   })
 
+  // Delete the current user (and all of it's records)
+  app.delete("/api/users", function(req, res) {
+    db.User.destroy({
+      where: {
+        id: req.user.id
+      }
+    }).then(function(dbUser) {
+      // Make sure to also log out the user and destroy the session.
+      //Set HTTP method to GET
+      // req.method = 'GET';
+      // res.redirect('/logout');
+      res.redirect(303, '/logout'); // This will set the method to GET anyway.
+      // res.json(dbUser);
+    }).catch(function(err) {
+      res.json(err);
+    })
+  })
+
   // Delete an example by id
   app.delete("/api/examples/:id", function(req, res) {
     db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
