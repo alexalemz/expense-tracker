@@ -16,7 +16,7 @@ module.exports = function(app) {
     // res.json("/members");
     // res.json("Login successful");
 
-    // After login, redirect the user to the homepage or to their intended path, if they had one.
+    // After login, redirect the user to the homepage or to their intended address, if they had one.
     let redirectTo = req.session.redirectTo || '/';
     delete req.session.redirectTo;
     res.json(redirectTo);
